@@ -18,7 +18,10 @@ class CocktailsController < ApplicationController
 
     #show- specific cocktail
     #make a get request to '/cocktails/:id'
-
+    get '/cocktails/:id' do
+        @cocktail = Cocktail.find(the recipe id)
+        erb :'/cocktails/show'
+    end
 
 
 
