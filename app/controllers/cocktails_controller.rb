@@ -43,6 +43,10 @@ class CocktailsController < ApplicationController
     #update /put
     #Edit Form
     #make a get request to '/cocktails/:id/edit'
+    get '/cocktails/:id/edit' do 
+       @cocktail = Cocktail.find(params["id"])
+        erb :'/cocktails/edit'
+    end
 
     #Update 
     #make a patch request to '/cocktails/:id'
