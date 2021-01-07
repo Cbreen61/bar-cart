@@ -1,0 +1,11 @@
+<h1>Create a Cocktail </h1>
+<p><%= @error %></p>
+<form action="/cocktails" method="post">
+    <label>Title</label>
+    <input type="text" name="title">
+    <label>Method</label>
+    <textarea name="method"></textarea>
+    <label>Image URL</label>
+    <input type="text" name="image">
+    <button type="submit">Add Cocktail</button>
+</form>
