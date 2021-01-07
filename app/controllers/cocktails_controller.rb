@@ -34,7 +34,7 @@ class CocktailsController < ApplicationController
     #show- specific cocktail
     #make a get request to '/cocktails/:id'
     get '/cocktails/:id' do
-        @cocktail = Cocktail.find(params["id"])
+        @cocktail = Cocktail.find(params[:id])
         erb :'/cocktails/show'
     end
 
@@ -44,12 +44,25 @@ class CocktailsController < ApplicationController
     #Edit Form
     #make a get request to '/cocktails/:id/edit'
     get '/cocktails/:id/edit' do 
-       @cocktail = Cocktail.find(params["id"])
+       @cocktail = Cocktail.find(params[:id])
         erb :'/cocktails/edit'
     end
 
     #Update 
     #make a patch request to '/cocktails/:id'
+
+    patch '/cocktails/:id' do 
+        @cocktail = Cocktail.find(params[:id])
+        if !params["cocktail"]["title"].empty? && !params["cocktail"]["method"].empty?
+            @cocktail.update(params["cocktail"])
+            redirect "/cocktails/#{params[:id]}"
+
+        else
+            @error = "Data not vaild, Please try again."
+            erb :'/cocktails/edit'
+        end
+    
+    end 
 
 
     #destroy /delete
