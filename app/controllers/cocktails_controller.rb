@@ -12,6 +12,7 @@ class CocktailsController < ApplicationController
     #index -all
     #make a get request to '/cocktails'
     get '/cocktails' do 
+        @cocktails = Cocktail.all
         erb :'cocktails/index'
     end
 
