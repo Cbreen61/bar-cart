@@ -67,6 +67,10 @@ class CocktailsController < ApplicationController
 
     #destroy /delete
     #make a delete request to '/cocktails/:id'
+    delete '/cocktails/:id' do
+        cocktail = Cocktail.find(params[:id])
+        cocktail.destroy
+    end
 
 
 

@@ -5,7 +5,7 @@
     <label>Title</label>
     <input type="text" name="cocktail[title]" value=" <%= @cocktail.title %>">
     <label>Method</label>
-    <textarea name="cocktail[method]" value="<%= @cocktail.method %>"></textarea>
+    <textarea name="cocktail[method]"><%= @cocktail.method %></textarea>
     <label>Image URL</label>
     <input type="text" name="cocktail[image]" value="<%= @cocktail.image %>">
     <button type="submit">Add Cocktail</button>
