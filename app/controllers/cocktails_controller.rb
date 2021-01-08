@@ -4,7 +4,11 @@ class CocktailsController < ApplicationController
     #New
     #make a get request to '/cocktails/new'
     get '/cocktails/new' do 
-        erb :'/cocktails/new'
+       if logged_in?
+         erb :'/cocktails/new'
+        else
+            redirect'/login'
+        end
     
     end
 
@@ -28,19 +32,24 @@ class CocktailsController < ApplicationController
     #make a get request to '/cocktails'
     get '/cocktails' do 
         
-        if User.find_by(id: session[:user_id])
+        if logged_in?
             @cocktails = Cocktail.all.reverse
             erb :'cocktails/index'
         else
-            redirect '/login'
+            redirect'/login'
         end
+       
     end
 
     #show- specific cocktail
     #make a get request to '/cocktails/:id'
     get '/cocktails/:id' do
-        @cocktail = Cocktail.find(params[:id])
-        erb :'/cocktails/show'
+        if logged_in?
+         @cocktail = Cocktail.find(params[:id])
+            erb :'/cocktails/show'
+        else
+            redirect'/login'
+        end
     end
 
 
@@ -49,8 +58,12 @@ class CocktailsController < ApplicationController
     #Edit Form
     #make a get request to '/cocktails/:id/edit'
     get '/cocktails/:id/edit' do 
-       @cocktail = Cocktail.find(params[:id])
-        erb :'/cocktails/edit'
+       if logged_in?
+            @cocktail = Cocktail.find(params[:id])
+            erb :'/cocktails/edit'
+        else
+            redirect'/login'
+        end
     end
 
     #Update 
