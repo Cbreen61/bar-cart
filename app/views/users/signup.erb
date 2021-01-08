@@ -1,6 +1,15 @@
-<%= @error %>
+<h1> Signup </h1>
+
+<% if @error%>
+    <% @error.each do |e| %>
+        <h1> Errors: <%= e %> </h1>
+    <%end%>
+<%end%>
+
 <form action="/signup" method="post">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <input type="submit" value="Sign Up">
+    <label> Username </label>
+    <input type=text name="username">
+    <label> Password </label>
+    <input type=password name="password">
+    <input type=submit value="Signup">
 </form>

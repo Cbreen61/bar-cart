@@ -27,8 +27,13 @@ class CocktailsController < ApplicationController
     #index -all
     #make a get request to '/cocktails'
     get '/cocktails' do 
-        @cocktails = Cocktail.all.reverse
-        erb :'cocktails/index'
+        
+        if User.find_by(id: session[:user_id])
+            @cocktails = Cocktail.all.reverse
+            erb :'cocktails/index'
+        else
+            redirect '/login'
+        end
     end
 
     #show- specific cocktail
