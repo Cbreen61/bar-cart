@@ -15,7 +15,9 @@ class CocktailsController < ApplicationController
     #Create
     #make a post request to '/cocktails'
     post '/cocktails' do
-        cocktail = current_user.cocktails.build(params)
+        filtered_params = params.reject{|key, value| key == "image" && value.empty?}
+        cocktail = current_user.cocktails.build(filtered_params)
+        cocktail.image = nil if cocktail.image.empty?
         if !cocktail.title.empty? && !cocktail.method.empty?
             cocktail.save
             redirect '/cocktails'

@@ -5,7 +5,7 @@
     <p><%= cocktail.method %></p>
     <img src="<%= cocktail.image %>" alt ="cocktail">
     <% # if the curreny logged in user created this cocktail, then they can edit else no option to %>
-    <% if cocktail.user && session[:user_id] == cocktail.user.id %>
+    <% if current_user == cocktail.user %>
         <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
     <%end%>
 <% end %>

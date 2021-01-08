@@ -3,5 +3,7 @@
 <img src="<%= @cocktail.image %> " alt="cocktail">
 <form action="/cocktails/<%= @cocktail.id %>" method="post">
     <input type="hidden" name="_method" value="delete">
-    <button type="submit">Delete this Cocktail</button>
+    <% if @cocktail.user  == current_user %>
+        <button type="submit">Delete this Cocktail</button>
+    <%end%>
 </form>
