@@ -70,6 +70,7 @@ class CocktailsController < ApplicationController
     delete '/cocktails/:id' do
         cocktail = Cocktail.find(params[:id])
         cocktail.destroy
+        redirect '/cocktails'
     end
 
 
