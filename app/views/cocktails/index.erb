@@ -4,6 +4,8 @@
     <h2><a href="/cocktails/<%= cocktail.id %>"><%= cocktail.title %> </a> </h2>
     <p><%= cocktail.method %></p>
     <img src="<%= cocktail.image %>" alt ="cocktail">
-    <% #if the curreny logged in user created this cocktail, then they can edit else no option to%>
-    <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
+    <% # if the curreny logged in user created this cocktail, then they can edit else no option to %>
+    <% if cocktail.user && session[:user_id] == cocktail.user.id %>
+        <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
+    <%end%>
 <% end %>

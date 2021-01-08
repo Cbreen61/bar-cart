@@ -15,7 +15,7 @@ class CocktailsController < ApplicationController
     #Create
     #make a post request to '/cocktails'
     post '/cocktails' do
-        cocktail = Cocktail.new(params)
+        cocktail = current_user.cocktails.build(params)
         if !cocktail.title.empty? && !cocktail.method.empty?
             cocktail.save
             redirect '/cocktails'
@@ -33,6 +33,7 @@ class CocktailsController < ApplicationController
     get '/cocktails' do 
         
         if logged_in?
+        
             @cocktails = Cocktail.all.reverse
             erb :'cocktails/index'
         else
