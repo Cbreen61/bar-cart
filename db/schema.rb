@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210107201442) do
+ActiveRecord::Schema.define(version: 20210109010800) do
 
   create_table "cocktails", force: :cascade do |t|
     t.string  "title"
     t.text    "method"
     t.string  "image",   default: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
     t.integer "user_id"
+  end
+
+  create_table "cocktails_ingredients", force: :cascade do |t|
+    t.integer "cocktail_id"
+    t.integer "ingredient_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
   end
 
   create_table "users", force: :cascade do |t|

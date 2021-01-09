@@ -1,15 +1,14 @@
 class CocktailsController < ApplicationController
 
+    before do
+        require_login 
+    end
+
     #create /post
     #New
     #make a get request to '/cocktails/new'
-    get '/cocktails/new' do 
-       if logged_in?
-         erb :'/cocktails/new'
-        else
-            redirect'/login'
-        end
-    
+    get '/cocktails/new' do
+        erb :'/cocktails/new'
     end
 
     #Create
@@ -18,8 +17,7 @@ class CocktailsController < ApplicationController
         filtered_params = params.reject{|key, value| key == "image" && value.empty?}
         cocktail = current_user.cocktails.build(filtered_params)
         cocktail.image = nil if cocktail.image.empty?
-        if !cocktail.title.empty? && !cocktail.method.empty?
-            cocktail.save
+        if cocktail.save
             redirect '/cocktails'
         
         else
@@ -33,25 +31,21 @@ class CocktailsController < ApplicationController
     #index -all
     #make a get request to '/cocktails'
     get '/cocktails' do 
+        @cocktails = Cocktail.all.reverse
+        erb :'cocktails/index'
         
-        if logged_in?
-        
-            @cocktails = Cocktail.all.reverse
-            erb :'cocktails/index'
-        else
-            redirect'/login'
-        end
        
     end
 
     #show- specific cocktail
     #make a get request to '/cocktails/:id'
     get '/cocktails/:id' do
-        if logged_in?
-         @cocktail = Cocktail.find(params[:id])
+        @cocktail = Cocktail.find_by(id: params[:id])
+        if @cocktail
             erb :'/cocktails/show'
-        else
-            redirect'/login'
+        else 
+            redirect '/cocktails'
+        
         end
     end
 
@@ -60,13 +54,9 @@ class CocktailsController < ApplicationController
     #update /put
     #Edit Form
     #make a get request to '/cocktails/:id/edit'
-    get '/cocktails/:id/edit' do 
-       if logged_in?
-            @cocktail = Cocktail.find(params[:id])
-            erb :'/cocktails/edit'
-        else
-            redirect'/login'
-        end
+    get '/cocktails/:id/edit' do
+        @cocktail = Cocktail.find(params[:id])
+        erb :'/cocktails/edit'
     end
 
     #Update 
