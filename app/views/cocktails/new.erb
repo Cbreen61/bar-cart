@@ -2,18 +2,18 @@
 <p><%= @error %></p>
 <form action="/cocktails" method="post">
     <label>Title</label>
-    <input type=text name="title">
+    <input type=text name="cocktail[title]">
     <label>Method</label>
-    <textarea name="method"></textarea>
+    <textarea name="cocktail[method]"></textarea>
     <label>Image URL</label>
-    <input type=text name="image">
+    <input type=text name="cocktail[image]">
     <label>Add Existing Ingredient or Create your own </label>
     <input type=text name="ingredient[name]">
     <% @ingredients.each.with_index do |ingredient, index|%>
         <% if index % 10 == 0 %>
             <br>
             <%end%>
-        <input type="checkbox" name= "ingredient_ids[]" value="<%= ingredient.id %>"><%= ingredient.name%></input>
+        <input type="checkbox" name= "cocktail[ingredient_ids][]" value="<%= ingredient.id %>"><%= ingredient.name%></input>
     <%end%>
    
     <button type=submit>Add Cocktail</button>
