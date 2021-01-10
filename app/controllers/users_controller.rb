@@ -37,6 +37,15 @@ class UsersController < ApplicationController
         redirect '/'
     end
 
-    #users can delet account 
+    get '/mixologybook' do 
+        @cocktails = current_user.cocktails.reverse
+        erb :'/cocktails/index'
+    end
+
+    get '/pantry' do
+        @ingredients = current_user.ingredients.uniq
+        erb :'/ingredients/index'
+
+    end
 
 end

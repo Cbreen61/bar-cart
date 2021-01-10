@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
     validates :password, presence: true
     validates_uniqueness_of :username
     has_many :cocktails
+    has_many :ingredients, through: :cocktails
     
 end

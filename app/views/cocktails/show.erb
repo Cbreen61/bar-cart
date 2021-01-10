@@ -1,9 +1,23 @@
 <h1><%= @cocktail.title %></h1>
-<h2><%=@cocktail.method %></h2>
 <img src="<%= @cocktail.image %> " alt="cocktail">
+<h2>Ingredients</h2>
+<ul>
+<% @cocktail.ingredients.each do |ingredient| %>
+    <%if ingredient.name.empty?%>
+    <% else %>
+        <li><%= ingredient.name %></li>
+    <%end%>
+<%end%>
+</ul>
+<h2>Method</h2>
+<p><%= @cocktail.method%>
 <form action="/cocktails/<%= @cocktail.id %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <% if @cocktail.user  == current_user %>
         <button type="submit">Delete this Cocktail</button>
     <%end%>
 </form>
+<% if @cocktail.user %>
+ <i> Posted by <%= @cocktail.user.username %></i>
+ <% end %>
+

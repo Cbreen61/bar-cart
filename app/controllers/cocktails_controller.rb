@@ -20,10 +20,12 @@ class CocktailsController < ApplicationController
         filtered_params["cocktail"]["method"] = filtered_params["cocktail"]["method"].gsub("\r\n", "<br/>")
         cocktail = current_user.cocktails.build(filtered_params["cocktail"])
         if ingredient = Ingredient.find_by(name: filtered_params["ingredient"]["name"])
+           
             cocktail.ingredients << ingredient
         else
             cocktail.ingredients.build(filtered_params["ingredient"])
         end
+        
         cocktail.image = nil if cocktail.image.empty?
         if cocktail.save
             redirect '/cocktails'
