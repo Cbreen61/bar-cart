@@ -1,0 +1,7 @@
+<h1>My Pantry</h1>
+<i>Here are the ingredients you need for the current cocktails in your mixology book:</i>
+<% @ingredients.each do |ingredient| %>
+    <h2><%= ingredient.name %></h2>
+    <img src="<%= ingredient.image %>" alt="cocktail">
+    
+<% end %>

@@ -39,12 +39,12 @@ class UsersController < ApplicationController
 
     get '/mixologybook' do 
         @cocktails = current_user.cocktails.reverse
-        erb :'/cocktails/index'
+        erb :'/users/mixologybook'
     end
 
     get '/pantry' do
         @ingredients = current_user.ingredients.uniq
-        erb :'/ingredients/index'
+        erb :'/users/pantry'
 
     end
 

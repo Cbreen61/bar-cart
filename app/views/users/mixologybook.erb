@@ -1,0 +1,13 @@
+<h1>My Mixology Book</h1>
+<div><i>Here are the cocktails you have created:</i></div>
+<a href="/cocktails/new">Create a Cocktail</a>
+<% @cocktails.each do |cocktail| %>
+    <h2><a href="/cocktails/<%= cocktail.id %>"><%= cocktail.title %> </a> </h2>
+    <img src="<%= cocktail.image %>" alt ="cocktail">
+    <div>
+    <%= cocktail.ingredients.map {|ingredient| ingredient.name }.join(', ') %>
+    </div>
+    <% if current_user == cocktail.user %>
+        <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
+    <%end%>
+<% end %>
