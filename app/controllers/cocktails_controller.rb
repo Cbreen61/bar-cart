@@ -8,13 +8,16 @@ class CocktailsController < ApplicationController
     #New
     #make a get request to '/cocktails/new'
     get '/cocktails/new' do
+        @ingredients = Ingredient.all
         erb :'/cocktails/new'
     end
 
     #Create
     #make a post request to '/cocktails'
     post '/cocktails' do
+        
         filtered_params = params.reject{|key, value| key == "image" && value.empty?}
+        binding.pry
         cocktail = current_user.cocktails.build(filtered_params)
         cocktail.image = nil if cocktail.image.empty?
         if cocktail.save

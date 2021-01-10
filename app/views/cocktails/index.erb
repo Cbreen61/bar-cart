@@ -4,7 +4,9 @@
     <h2><a href="/cocktails/<%= cocktail.id %>"><%= cocktail.title %> </a> </h2>
     <p><%= cocktail.method %></p>
     <img src="<%= cocktail.image %>" alt ="cocktail">
-    <% # if the curreny logged in user created this cocktail, then they can edit else no option to %>
+    <div>
+    <%= cocktail.ingredients.map {|ingredient| ingredient.name }.join(', ') %>
+    </div>
     <% if current_user == cocktail.user %>
         <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
     <%end%>
