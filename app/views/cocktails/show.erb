@@ -1,14 +1,16 @@
 <h1><%= @cocktail.title %></h1>
 <img src="<%= @cocktail.image %> " alt="cocktail">
 <h2>Ingredients</h2>
-<ul>
-<% @cocktail.ingredients.each do |ingredient| %>
-    <%if ingredient.name.empty?%>
-    <% else %>
-        <li><%= ingredient.name %></li>
-    <%end%>
-<%end%>
-</ul>
+<div class="cocktail-card">
+    <ul>
+        <% @cocktail.ingredients.each do |ingredient| %>
+            <%if ingredient.name.empty?%>
+            <% else %>
+            <li><%= ingredient.name %></li>
+            <%end%>
+        <%end%>
+    </ul>
+</div>
 <h2>Method</h2>
 <p><%= @cocktail.method%>
 <form action="/cocktails/<%= @cocktail.id %>" method="post">

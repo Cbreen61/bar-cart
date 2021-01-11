@@ -1,11 +1,11 @@
-ul {
+body ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
     opacity: 0.9;
-  }
+}
 .title {
     float: left;
     display: block;
@@ -18,11 +18,11 @@ h1{
     margin: 10px;
 }
   
-  li {
+ul li {
     float: right;
-  }
+}
   
-  li a {
+ul li a {
     order: reverse;
     display: block;
     margin: 15px;
@@ -30,25 +30,28 @@ h1{
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
-  
-  /* Change the link color to #111 (black) on hover */
-  li a:hover {
+}
+body ul li a:hover {
     background-color: #111;
-  }
-  li {
+}
+ul li {
     border-left: 1px solid #bbb;
     
-  }
+}
   
-  li:last-child {
+ul li:last-child {
     border-right: none;
-  }
-  ul {
+}
+ul {
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
-  }
-  .wrapper {
-      padding: 58px,5px;
-    }
+}
+.cocktail-card ul li{
+    float: left;
+    display: list-item;
+    color: rgb(249, 13, 13);
+    text-align: center;
+    padding: 14px 16px;
+
+}

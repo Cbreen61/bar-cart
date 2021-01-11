@@ -25,7 +25,7 @@ class CocktailsController < ApplicationController
                     cocktail.ingredients << ingredient
                 else
                     if ingredient_hash["image"].empty?
-                        ingredient_hash["image"] = ""
+                        ingredient_hash["image"] = "https://images.pexels.com/photos/5946594/pexels-photo-5946594.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                     end
                     cocktail.ingredients.build(ingredient_hash)
                 end
@@ -91,7 +91,7 @@ class CocktailsController < ApplicationController
                         cocktail.ingredients << ingredient
                     else
                         if ingredient_hash["image"].empty?
-                            ingredient_hash["image"] =""
+                            ingredient_hash["image"] ="https://images.pexels.com/photos/5946594/pexels-photo-5946594.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                         end
                         cocktail.ingredients.build(ingredient_hash)
                     end
