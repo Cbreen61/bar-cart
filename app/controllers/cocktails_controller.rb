@@ -19,11 +19,17 @@ class CocktailsController < ApplicationController
         filtered_params["cocktail"] = params["cocktail"].reject{|key, value| key == "image" && value.empty?}
         filtered_params["cocktail"]["method"] = filtered_params["cocktail"]["method"].gsub("\r\n", "<br/>")
         cocktail = current_user.cocktails.build(filtered_params["cocktail"])
-        if ingredient = Ingredient.find_by(name: filtered_params["ingredient"]["name"])
-           
-            cocktail.ingredients << ingredient
-        else
-            cocktail.ingredients.build(filtered_params["ingredient"])
+        params["ingredients"].uniq.each do |ingredient_hash|
+            if !ingredient_hash["name"].empty?
+                if ingredient = Ingredient.find_by(name: ingredient_hash["name"])
+                    cocktail.ingredients << ingredient
+                else
+                    if ingredient_hash["image"].empty?
+                        ingredient_hash["image"] = ""
+                    end
+                    cocktail.ingredients.build(ingredient_hash)
+                end
+            end
         end
         
         cocktail.image = nil if cocktail.image.empty?
@@ -31,7 +37,8 @@ class CocktailsController < ApplicationController
             redirect '/cocktails'
         
         else
-            @error = "Missing data. Please try again"
+            @ingredients = Ingredient.all
+            @error = cocktail.errors.full_messages.join("<br/>")
             erb :'/cocktails/new'
         end
     end 
@@ -66,6 +73,7 @@ class CocktailsController < ApplicationController
     #make a get request to '/cocktails/:id/edit'
     get '/cocktails/:id/edit' do
         @cocktail = Cocktail.find(params[:id])
+        @ingredients = Ingredient.all
         erb :'/cocktails/edit'
     end
 
@@ -73,9 +81,23 @@ class CocktailsController < ApplicationController
     #make a patch request to '/cocktails/:id'
 
     patch '/cocktails/:id' do 
-        @cocktail = Cocktail.find(params[:id])
+        cocktail = Cocktail.find(params[:id])
         if !params["cocktail"]["title"].empty? && !params["cocktail"]["method"].empty?
-            @cocktail.update(params["cocktail"])
+            params["cocktail"]["ingredient_ids"] =[] if params["cocktail"]["ingredient_ids"].nil?
+            cocktail.update(params["cocktail"])
+            params["ingredients"].uniq.each do |ingredient_hash|
+                if !ingredient_hash["name"].empty?
+                    if ingredient = Ingredient.find_by(name: ingredient_hash["name"])
+                        cocktail.ingredients << ingredient
+                    else
+                        if ingredient_hash["image"].empty?
+                            ingredient_hash["image"] =""
+                        end
+                        cocktail.ingredients.build(ingredient_hash)
+                    end
+                    cocktail.save
+                end
+            end
             redirect "/cocktails/#{params[:id]}"
 
         else

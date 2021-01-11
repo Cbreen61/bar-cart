@@ -1,13 +1,19 @@
-<h1>Cocktails</h1>
-<a href="/cocktails/new">Create a Cocktail</a>
-<% @cocktails.each do |cocktail| %>
-    <h2><a href="/cocktails/<%= cocktail.id %>"><%= cocktail.title %> </a> </h2>
-    <p><%= cocktail.method %></p>
-    <img src="<%= cocktail.image %>" alt ="cocktail">
-    <div>
-    <%= cocktail.ingredients.map {|ingredient| ingredient.name }.join(', ') %>
-    </div>
-    <% if current_user == cocktail.user %>
-        <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
-    <%end%>
-<% end %>
+<div class="cocktails-container">
+    <h1>Cocktails</h1>
+    <a href="/cocktails/new">Create a Cocktail</a>
+    
+    <% @cocktails.each do |cocktail| %>
+        <div class="cocktail-card">
+            <h2><a href="/cocktails/<%= cocktail.id %>"><%= cocktail.title %> </a> </h2>
+            <p><%= cocktail.method %></p>
+            <img src="<%= cocktail.image %>" alt ="cocktail">
+            <div>
+            <%= cocktail.ingredients.map {|ingredient| ingredient.name }.join(', ') %>
+            </div>
+            <% if current_user == cocktail.user %>
+                <p><a href="/cocktails/<%=cocktail.id%>/edit">Edit</a><p>
+            <%end%>
+        </div>
+    <% end %>
+    
+</div>

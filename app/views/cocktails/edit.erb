@@ -3,10 +3,32 @@
 <form action="/cocktails/<%=@cocktail.id%>" method="post">
     <input type=hidden name="_method" value="patch">
     <label>Title</label>
-    <input type=text name="cocktail[title]" value=" <%= @cocktail.title %>">
-    <label>Method</label>
-    <textarea name="cocktail[method]"><%= @cocktail.method %></textarea>
-    <label>Image URL</label>
-    <input type=text name="cocktail[image]" value="<%= @cocktail.image %>">
-    <button type=submit>Add Cocktail</button>
+                <input type="text" name="cocktail[title]" value="<%= @cocktail.title %>">
+                <label>Change existing ingredients or create more</label>
+                <label>Ingredients</label>
+                <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+                <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+                <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+                <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+                <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+                <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+                <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+                <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+                <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+                <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+                <label>Method</label>
+                <textarea name="cocktail[method]"><%= @cocktail.method %></textarea>
+                <label>Image URL</label>
+                <input type="text" name="cocktail[image]" value="<%= @cocktail.image %>"></div>
+        <div class="checkboxes">
+            <% @ingredients.each.with_index do |ingredient, index| %>
+                <div class="checkbox">
+                    <input type="checkbox" <%= "checked" if @cocktail.ingredients.include?(ingredient) %> name="cocktail[ingredient_ids][]" value="<%= ingredient.id %>"><%= ingredient.name %></input>
+                </div>
+            <% end %>
+        </div>
+        <div class="submit">
+            <button class="button" type="submit">Update Cocktail</button>
+        </div>
+    </div>
 </form>

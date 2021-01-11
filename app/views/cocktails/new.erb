@@ -1,20 +1,28 @@
 <h1>Create a Cocktail </h1>
+<i>Add existing ingredient or create your own </i>
 <p><%= @error %></p>
 <form action="/cocktails" method="post">
     <label>Title</label>
-    <input type=text name="cocktail[title]">
-    <label>Method</label>
-    <textarea name="cocktail[method]"></textarea>
-    <label>Image URL</label>
-    <input type=text name="cocktail[image]">
-    <label>Add Existing Ingredient or Create your own </label>
-    <input type=text name="ingredient[name]">
+    <input type="text" placeholder="Name of cocktail" name="cocktail[title]">
+        
+        <br><label>Ingredients</label><br>
+        <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+        <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+        <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+        <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+        <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+        <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+        <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+        <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+        <input type="text" placeholder="Ingredient Name" name="ingredients[][name]">
+        <input type="text" placeholder="Link to Image" name="ingredients[][image]"><br>
+        <label>Method</label>
+        <textarea name="cocktail[method]" placeholder="Instructions for making this recipe"></textarea>
+        <label>Image URL</label>
+        <input type="text" placeholder="Link to cocktail image" name="cocktail[image]">    
     <% @ingredients.each.with_index do |ingredient, index|%>
-        <% if index % 10 == 0 %>
-            <br>
-            <%end%>
         <input type="checkbox" name= "cocktail[ingredient_ids][]" value="<%= ingredient.id %>"><%= ingredient.name%></input>
     <%end%>
-   
+
     <button type=submit>Add Cocktail</button>
 </form>

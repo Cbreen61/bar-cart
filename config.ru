@@ -1,11 +1,13 @@
 require './config/environment'
 
+
 if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
 
-use IngredientsController
+
 use UsersController
 use Rack::MethodOverride
+use IngredientsController
 use CocktailsController
 run ApplicationController

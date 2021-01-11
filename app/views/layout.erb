@@ -11,24 +11,27 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
+    <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-    <div>
-    <% if logged_in? %>
-      <div><a href="/cocktails">Cocktails</a></div>
-      <div><a href="/mixologybook">My Mixology Book</a><div>
-      <div><a href="/pantry">My Pantry</a></div>
-      <div><a href="/logout">Log Out</a></div>
-    <% else %>  
-      <div><a href="/signup">Sign Up</a></div>
-      <div><a href="/login">Log In</a></div>
-    <%end%>
-      <div><a href="/">Home</a></div>
+    <ul>
+      <div class="title"><h1>Bar Cart </h1></div>
+      
+      <% if logged_in? %>
+        <li><a href="/logout">Log Out</a></li>
+        <li><a href="/cocktails">Cocktails</a></li>
+        <li><a href="/mixologybook">My Mixology Book</a><li>
+        <li><a href="/pantry">My Pantry</a></li>
+      
+      <% else %>
+        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/login">Log In</a></li>
+      <%end%>
+      <li><a href="/">Home</a></li>
 
         
 
-    </div>
+    </ul>
     <div class="wrapper">
 
         <%= yield %>
